@@ -46,17 +46,18 @@ title: 打包发布
 在 Xcode 中配置签名设置：
 
 1. 打开 macOS 项目：
-   ```bash
-   open macos/Runner.xcworkspace
-   ```
+
+    ```bash
+    open macos/Runner.xcworkspace
+    ```
 
 2. 在 Xcode 中：
-   - 选择 Runner 项目
-   - 选择 Runner target
-   - 在 Signing & Capabilities 标签页中：
-     - 选择你的开发者账号
-     - 设置 Bundle Identifier
-     - 启用自动签名
+    - 选择 Runner 项目
+    - 选择 Runner target
+    - 在 Signing & Capabilities 标签页中：
+        - 选择你的开发者账号
+        - 设置 Bundle Identifier
+        - 启用自动签名
 
 ## 打包应用
 
@@ -70,21 +71,22 @@ flutter build macos --release
 ### 2. 创建 DMG 安装包
 
 1. 安装 create-dmg 工具：
-   ```bash
-   brew install create-dmg
-   ```
+
+    ```bash
+    brew install create-dmg
+    ```
 
 2. 创建 DMG 文件：
-   ```bash
-   create-dmg \
-     --volname "快捷键应用" \
-     --window-pos 200 120 \
-     --window-size 800 400 \
-     --icon-size 100 \
-     --app-drop-link 600 185 \
-     "快捷键应用.dmg" \
-     "build/macos/Build/Products/Release/快捷键应用.app"
-   ```
+    ```bash
+    create-dmg \
+      --volname "快捷键应用" \
+      --window-pos 200 120 \
+      --window-size 800 400 \
+      --icon-size 100 \
+      --app-drop-link 600 185 \
+      "快捷键应用.dmg" \
+      "build/macos/Build/Products/Release/快捷键应用.app"
+    ```
 
 ## 发布到 App Store
 
@@ -94,92 +96,95 @@ flutter build macos --release
 
 1. 创建新应用
 2. 填写应用信息：
-   - 名称和描述
-   - 截图和预览
-   - 关键词和分类
-   - 隐私政策
+    - 名称和描述
+    - 截图和预览
+    - 关键词和分类
+    - 隐私政策
 
 ### 2. 上传应用
 
 1. 使用 Xcode 上传：
-   - 选择 Product > Archive
-   - 在 Archives 窗口中选择最新的归档
-   - 点击 Distribute App
-   - 选择 App Store Connect
-   - 按照向导完成上传
+    - 选择 Product > Archive
+    - 在 Archives 窗口中选择最新的归档
+    - 点击 Distribute App
+    - 选择 App Store Connect
+    - 按照向导完成上传
 
 2. 或使用命令行上传：
-   ```bash
-   xcrun altool --upload-app --type macos --file "path/to/app.pkg" \
-     --username "your@email.com" --password "app-specific-password"
-   ```
+    ```bash
+    xcrun altool --upload-app --type macos --file "path/to/app.pkg" \
+      --username "your@email.com" --password "app-specific-password"
+    ```
 
 ### 3. 提交审核
 
 1. 在 App Store Connect 中：
-   - 确保所有必需信息已填写完整
-   - 添加构建版本到新版本
-   - 提交审核
+    - 确保所有必需信息已填写完整
+    - 添加构建版本到新版本
+    - 提交审核
 
 ## 自动化发布
 
 ### 1. 使用 Fastlane
 
 1. 安装 Fastlane：
-   ```bash
-   brew install fastlane
-   ```
+
+    ```bash
+    brew install fastlane
+    ```
 
 2. 初始化 Fastlane：
-   ```bash
-   cd macos
-   fastlane init
-   ```
+
+    ```bash
+    cd macos
+    fastlane init
+    ```
 
 3. 配置 Fastfile：
-   ```ruby
-   default_platform(:mac)
 
-   platform :mac do
-     desc "发布到 App Store"
-     lane :release do
-       build_mac_app(
-         workspace: "Runner.xcworkspace",
-         scheme: "Runner",
-         export_method: "app-store"
-       )
-       upload_to_app_store(
-         skip_metadata: true,
-         skip_screenshots: true
-       )
-     end
-   end
-   ```
+    ```ruby
+    default_platform(:mac)
+
+    platform :mac do
+      desc "发布到 App Store"
+      lane :release do
+        build_mac_app(
+          workspace: "Runner.xcworkspace",
+          scheme: "Runner",
+          export_method: "app-store"
+        )
+        upload_to_app_store(
+          skip_metadata: true,
+          skip_screenshots: true
+        )
+      end
+    end
+    ```
 
 4. 运行发布流程：
-   ```bash
-   fastlane release
-   ```
+    ```bash
+    fastlane release
+    ```
 
 ## 常见问题
 
 1. **签名错误**
-   - 检查开发者账号状态
-   - 更新证书和配置文件
-   - 清理 Xcode 缓存：
-     ```bash
-     rm -rf ~/Library/Developer/Xcode/DerivedData
-     ```
+    - 检查开发者账号状态
+    - 更新证书和配置文件
+    - 清理 Xcode 缓存：
+        ```bash
+        rm -rf ~/Library/Developer/Xcode/DerivedData
+        ```
 
 2. **上传失败**
-   - 确保应用版本号唯一
-   - 检查网络连接
-   - 验证 Apple ID 和密码
+    - 确保应用版本号唯一
+    - 检查网络连接
+    - 验证 Apple ID 和密码
 
 3. **审核被拒**
-   - 仔细阅读拒绝原因
-   - 确保应用符合指南要求
-   - 完善隐私政策和文档
+    - 仔细阅读拒绝原因
+    - 确保应用符合指南要求
+    - 完善隐私政策和文档
 
 ## 练习
 

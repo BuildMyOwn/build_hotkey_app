@@ -10,7 +10,7 @@ title: 状态管理
 
 ```yaml
 dependencies:
-  provider: ^6.0.5
+    provider: ^6.0.5
 ```
 
 运行以下命令安装依赖：
@@ -41,13 +41,13 @@ class AppSettings extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _isDarkMode = prefs.getBool('isDarkMode') ?? false;
     _startAtLogin = prefs.getBool('startAtLogin') ?? false;
-    
+
     // 加载快捷键设置
     final hotKeyJson = prefs.getString('globalHotKey');
     if (hotKeyJson != null) {
       _globalHotKey = HotKey.fromJson(jsonDecode(hotKeyJson));
     }
-    
+
     notifyListeners();
   }
 
@@ -224,8 +224,8 @@ class HotKeySettingsPage extends StatelessWidget {
 ## 最佳实践
 
 1. **状态分离**
-   - 将不同类型的状态分离到不同的 Provider 中
-   - 避免创建过大的状态对象
+    - 将不同类型的状态分离到不同的 Provider 中
+    - 避免创建过大的状态对象
 
 ```dart
 // 分离主题设置
@@ -252,42 +252,44 @@ class HotKeySettings extends ChangeNotifier {
 ```
 
 2. **状态持久化**
-   - 使用 shared_preferences 保存设置
-   - 在应用启动时加载保存的设置
+    - 使用 shared_preferences 保存设置
+    - 在应用启动时加载保存的设置
 
 3. **状态更新**
-   - 只在必要时调用 notifyListeners()
-   - 避免频繁更新状态
+    - 只在必要时调用 notifyListeners()
+    - 避免频繁更新状态
 
 ## 常见问题
 
 1. **如何处理异步状态更新？**
-   ```dart
-   Future<void> loadSettings() async {
-     try {
-       final prefs = await SharedPreferences.getInstance();
-       _isDarkMode = prefs.getBool('isDarkMode') ?? false;
-       notifyListeners();
-     } catch (e) {
-       print('加载设置失败：$e');
-     }
-   }
-   ```
+
+    ```dart
+    Future<void> loadSettings() async {
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        _isDarkMode = prefs.getBool('isDarkMode') ?? false;
+        notifyListeners();
+      } catch (e) {
+        print('加载设置失败：$e');
+      }
+    }
+    ```
 
 2. **如何避免不必要的重建？**
-   ```dart
-   // 使用 Selector 只监听特定的状态变化
-   Selector<AppSettings, bool>(
-     selector: (_, settings) => settings.isDarkMode,
-     builder: (context, isDarkMode, child) {
-       return Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode);
-     },
-   )
-   ```
+
+    ```dart
+    // 使用 Selector 只监听特定的状态变化
+    Selector<AppSettings, bool>(
+      selector: (_, settings) => settings.isDarkMode,
+      builder: (context, isDarkMode, child) {
+        return Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode);
+      },
+    )
+    ```
 
 3. **如何在多个页面间共享状态？**
-   - 将 Provider 放在widget树的顶层
-   - 使用 context.read() 获取Provider实例
+    - 将 Provider 放在widget树的顶层
+    - 使用 context.read() 获取Provider实例
 
 ## 练习
 
