@@ -10,7 +10,7 @@ title: 快捷键设置
 
 ```yaml
 dependencies:
-    hotkey_manager: ^0.1.8
+  hotkey_manager: ^0.1.8
 ```
 
 运行以下命令安装依赖：
@@ -29,12 +29,12 @@ import 'package:hotkey_manager/hotkey_manager.dart';
 void main() async {
   // 确保 Flutter 绑定初始化
   WidgetsFlutterBinding.ensureInitialized();
-
+  
   // 初始化 hotkey_manager
   await hotKeyManager.initialize();
 
   // 其他初始化代码...
-
+  
   runApp(const MyApp());
 }
 ```
@@ -234,24 +234,23 @@ class _HotKeySettingsPageState extends State<HotKeySettingsPage> {
 ## 常见问题
 
 1. **为什么快捷键在某些应用中不生效？**
-    - 某些应用可能会拦截系统级快捷键
-    - 检查是否有其他应用注册了相同的快捷键
-    - 确保应用有适当的系统权限
+   - 某些应用可能会拦截系统级快捷键
+   - 检查是否有其他应用注册了相同的快捷键
+   - 确保应用有适当的系统权限
 
 2. **如何处理快捷键冲突？**
-
-    ```dart
-    try {
-      await hotKeyManager.register(hotKey);
-    } catch (e) {
-      print('快捷键注册失败：$e');
-      // 提示用户选择其他快捷键组合
-    }
-    ```
+   ```dart
+   try {
+     await hotKeyManager.register(hotKey);
+   } catch (e) {
+     print('快捷键注册失败：$e');
+     // 提示用户选择其他快捷键组合
+   }
+   ```
 
 3. **如何保存快捷键设置？**
-    - 使用 shared_preferences 或其他本地存储方案保存配置
-    - 在应用启动时加载保存的配置
+   - 使用 shared_preferences 或其他本地存储方案保存配置
+   - 在应用启动时加载保存的配置
 
 ## 练习
 

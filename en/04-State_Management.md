@@ -10,7 +10,7 @@ First, we need to add the provider dependency in the pubspec.yaml file:
 
 ```yaml
 dependencies:
-    provider: ^6.0.5
+  provider: ^6.0.5
 ```
 
 Run the following command to install the dependency:
@@ -41,13 +41,13 @@ class AppSettings extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _isDarkMode = prefs.getBool('isDarkMode') ?? false;
     _startAtLogin = prefs.getBool('startAtLogin') ?? false;
-
+    
     // Load hotkey settings
     final hotKeyJson = prefs.getString('globalHotKey');
     if (hotKeyJson != null) {
       _globalHotKey = HotKey.fromJson(jsonDecode(hotKeyJson));
     }
-
+    
     notifyListeners();
   }
 
@@ -140,17 +140,17 @@ class SettingsPage extends StatelessWidget {
 ## Common Issues
 
 1. **State not updating**
-    - Ensure you call notifyListeners() after state changes
-    - Check if the widget is wrapped in a Provider
-    - Verify the correct use of Consumer or context.watch()
+   - Ensure you call notifyListeners() after state changes
+   - Check if the widget is wrapped in a Provider
+   - Verify the correct use of Consumer or context.watch()
 
 2. **State lost after app restart**
-    - Make sure to properly save state to persistent storage
-    - Handle loading state during app initialization
+   - Make sure to properly save state to persistent storage
+   - Handle loading state during app initialization
 
 3. **Multiple Provider instances**
-    - Use MultiProvider to organize multiple providers
-    - Keep provider hierarchy clean and logical
+   - Use MultiProvider to organize multiple providers
+   - Keep provider hierarchy clean and logical
 
 ## Next Step
 

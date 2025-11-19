@@ -48,18 +48,17 @@ Configure app information in the macos/Runner/Info.plist file:
 Configure signing settings in Xcode:
 
 1. Open the macOS project:
-
-    ```bash
-    open macos/Runner.xcworkspace
-    ```
+   ```bash
+   open macos/Runner.xcworkspace
+   ```
 
 2. In Xcode:
-    - Select the Runner project
-    - Select the Runner target
-    - In the Signing & Capabilities tab:
-        - Select your developer account
-        - Set the Bundle Identifier
-        - Enable automatic signing
+   - Select the Runner project
+   - Select the Runner target
+   - In the Signing & Capabilities tab:
+     - Select your developer account
+     - Set the Bundle Identifier
+     - Enable automatic signing
 
 ## Package the Application
 
@@ -73,22 +72,21 @@ flutter build macos --release
 ### 2. Create DMG Installer
 
 1. Install create-dmg tool:
-
-    ```bash
-    brew install create-dmg
-    ```
+   ```bash
+   brew install create-dmg
+   ```
 
 2. Create DMG file:
-    ```bash
-    create-dmg \
-      --volname "Hotkey App" \
-      --window-pos 200 120 \
-      --window-size 800 400 \
-      --icon-size 100 \
-      --app-drop-link 600 185 \
-      "Hotkey App.dmg" \
-      "build/macos/Build/Products/Release/Hotkey App.app"
-    ```
+   ```bash
+   create-dmg \
+     --volname "Hotkey App" \
+     --window-pos 200 120 \
+     --window-size 800 400 \
+     --icon-size 100 \
+     --app-drop-link 600 185 \
+     "Hotkey App.dmg" \
+     "build/macos/Build/Products/Release/Hotkey App.app"
+   ```
 
 ## Publish to App Store
 
@@ -98,41 +96,41 @@ In App Store Connect:
 
 1. Create a new application
 2. Fill in app information:
-    - Name and description
-    - Screenshots and previews
-    - Keywords and categories
-    - Privacy policy
+   - Name and description
+   - Screenshots and previews
+   - Keywords and categories
+   - Privacy policy
 
 ### 2. Upload Application
 
 1. Archive the application in Xcode:
-    - Select Product > Archive
-    - In the Archives window, click "Distribute App"
-    - Choose "App Store Connect"
-    - Follow the distribution wizard
+   - Select Product > Archive
+   - In the Archives window, click "Distribute App"
+   - Choose "App Store Connect"
+   - Follow the distribution wizard
 
 2. Submit for review:
-    - In App Store Connect, select your application
-    - Click "Submit for Review"
-    - Answer the review questions
-    - Submit the application
+   - In App Store Connect, select your application
+   - Click "Submit for Review"
+   - Answer the review questions
+   - Submit the application
 
 ## Common Issues
 
 1. **Code Signing Issues**
-    - Ensure certificates are valid
-    - Check provisioning profile settings
-    - Verify bundle identifier matches
+   - Ensure certificates are valid
+   - Check provisioning profile settings
+   - Verify bundle identifier matches
 
 2. **App Store Rejection**
-    - Follow App Store guidelines
-    - Provide clear privacy policy
-    - Test thoroughly before submission
+   - Follow App Store guidelines
+   - Provide clear privacy policy
+   - Test thoroughly before submission
 
 3. **DMG Creation Errors**
-    - Check file paths and permissions
-    - Ensure app is properly signed
-    - Verify DMG settings
+   - Check file paths and permissions
+   - Ensure app is properly signed
+   - Verify DMG settings
 
 ## Summary
 
