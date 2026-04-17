@@ -1,0 +1,92 @@
+---
+order: 4
+title: State Management
+---
+
+```json
+# {frontmatter.title}
+```dart
+
+In this chapter, we will learn how to use Provider for state management.
+
+## Provider Introduction
+
+Provider is a popular state management solution in Flutter.
+
+## Implement State Management
+
+```dart
+class HotKeySettings extends ChangeNotifier {
+  HotKey? _globalHotKey;
+
+  HotKey? get globalHotKey => _globalHotKey;
+
+  void setGlobalHotKey(HotKey hotKey) {
+    _globalHotKey = hotKey;
+    notifyListeners();
+  }
+}
+
+class HotKeyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => HotKeySettings(),
+      child: MaterialApp(
+        home: HotKeySettingsPage(),
+      ),
+    );
+  }
+}
+
+class HotKeySettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hotkey Settings'),
+      ),
+      body: Consumer<HotKeySettings>(
+        builder: (context, settings, child) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Current Hotkey: ${settings.globalHotKey?.toString() ?? "Not Set"}',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  // Show hotkey recording dialog
+                  final newHotKey = await showDialog<HotKey>(
+                    context: context,
+                    builder: (context) => HotKeyRecordDialog(),
+                  );
+
+                  if (newHotKey != null) {
+                    context.read<HotKeySettings>().setGlobalHotKey(newHotKey);
+                  }
+                },
+                child: Text('Set New Hotkey'),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+## Common Issues
+
+1. **Using Provider**
+   - Use `Consumer` to access state
+   - Use `context.read()` to read state
+
+2. **State Updates**
+   - Call `notifyListeners()` to notify listeners
+
+## Next Steps
+
+In the next chapter, we will learn how to package and publish the app.

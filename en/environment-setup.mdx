@@ -1,6 +1,12 @@
 ---
+order: 0
 title: Environment Setup
 ---
+
+```json
+# {frontmatter.title}
+```dart
+
 
 Before we start developing our hotkey application, we need to set up the development environment. This chapter will guide you through all the necessary configurations.
 
@@ -10,20 +16,20 @@ Before we start developing our hotkey application, we need to set up the develop
    https://flutter.dev/docs/get-started/install/macos
 
 2. Extract the downloaded file to your preferred location, for example:
-   ```bash
+```bash
    cd ~/development
    unzip ~/Downloads/flutter_macos_arm64_3.x.x-stable.zip
-   ```
+```
 
 3. Add Flutter to your environment variables by editing `~/.zshrc` or `~/.bash_profile`:
-   ```bash
+```bash
    export PATH="$PATH:~/development/flutter/bin"
-   ```
+```dart
 
 4. Run the following command to verify the installation:
-   ```bash
+```bash
    flutter doctor
-   ```
+```
 
 ## Install Xcode
 
@@ -32,14 +38,14 @@ Since we're developing a macOS application, we need to install Xcode:
 1. Install Xcode from the Mac App Store
 
 2. After installation, run the following command to accept the license agreement:
-   ```bash
+```bash
    sudo xcodebuild -license accept
-   ```
+```dart
 
 3. Install Xcode command-line tools:
-   ```bash
+```bash
    sudo xcode-select --install
-   ```
+```
 
 ## Configure VS Code
 
@@ -53,14 +59,14 @@ Since we're developing a macOS application, we need to install Xcode:
 ## Enable macOS Desktop Support
 
 1. Enable macOS desktop support:
-   ```bash
+```bash
    flutter config --enable-macos-desktop
-   ```
+```dart
 
 2. Verify that macOS is in the list of supported platforms:
-   ```bash
+```bash
    flutter devices
-   ```
+```
 
 ## Verify Environment
 
@@ -68,7 +74,6 @@ Run the following command to check if the environment is configured correctly:
 
 ```bash
 flutter doctor
-```
 
 Ensure all check items show ✓. If there are any issues, follow the prompts to resolve them.
 

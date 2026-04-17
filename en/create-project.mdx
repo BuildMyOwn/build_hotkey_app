@@ -1,0 +1,88 @@
+---
+order: 1
+title: Create Project
+---
+
+# {frontmatter.title}
+
+In this chapter, we will create a new Flutter project for our hotkey application.
+
+## Create Flutter Project
+
+Run the following command to create a new Flutter project:
+
+```bash
+flutter create hotkey_app
+cd hotkey_app
+```
+
+## Add Dependencies
+
+Add the following dependencies to `pubspec.yaml`:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  window_manager: ^0.3.0
+  hotkey_manager: ^0.1.7
+  provider: ^6.0.0
+```
+
+## Configure macOS Permissions
+
+1. Open `macos/Runner/DebugProfile.entitlements` file and add the following permissions:
+
+```xml
+<dict>
+  <key>com.apple.security.temporary-exception.apple-events</key>
+  <string>com.apple.systemevents</string>
+</dict>
+```
+
+2. Add the same configuration to `macos/Runner/Release.entitlements`.
+
+## Clean Default Code
+
+1. Open `lib/main.dart` and remove the default counter example code.
+
+2. Create the basic application structure:
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hotkey App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hotkey App'),
+      ),
+      body: Center(
+        child: Text('Hello World'),
+      ),
+    );
+  }
+}
+```
+
+## Next Steps
+
+Now that the project is set up, we will learn about window management in the next chapter.

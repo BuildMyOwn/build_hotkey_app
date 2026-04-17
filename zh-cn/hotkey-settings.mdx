@@ -1,0 +1,74 @@
+---
+order: 3
+title: 快捷键设置
+---
+
+```json
+# {frontmatter.title}
+```dart
+
+在本章中，我们将学习如何使用 hotkey_manager 包来实现全局快捷键功能。
+
+## 注册快捷键
+
+```dart
+class HotKeySettingsPage extends StatefulWidget {
+  @override
+  _HotKeySettingsPageState createState() => _HotKeySettingsPageState();
+}
+
+class _HotKeySettingsPageState extends State<HotKeySettingsPage> {
+  HotKey? _currentHotKey;
+  bool _isRecording = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('快捷键设置'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '当前快捷键: ${_currentHotKey?.toJson() ?? "未设置"}',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _isRecording = true;
+                });
+              },
+              child: Text('设置新快捷键'),
+            ),
+            if (_isRecording)
+              KeyboardListener(
+                focusNode: FocusNode(),
+                onKeyEvent: (event) {
+                  // 处理按键事件
+                },
+                child: Container(),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+## 常见问题
+
+1. **快捷键不起作用？**
+   - 检查系统权限
+   - 验证快捷键冲突
+
+2. **如何保存设置？**
+   - 使用 shared_preferences
+
+## 下一步
+
+在下一章中学习状态管理。

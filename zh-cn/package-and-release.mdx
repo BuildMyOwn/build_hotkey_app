@@ -1,0 +1,56 @@
+---
+order: 5
+title: 打包和发布
+---
+
+# {frontmatter.title}
+
+在本章中，我们将学习如何打包和发布 Flutter 桌面应用。
+
+## 构建应用
+
+运行以下命令构建应用：
+
+```bash
+flutter build macos --release
+```
+
+构建后的应用位于：
+
+```
+build/macos/Build/Products/Release/
+```
+
+## 配置应用信息
+
+在 `macos/Runner/Info.plist` 文件中配置应用信息，如应用名称、版本号等。
+
+## 创建安装包
+
+可以使用 `create-dmg` 工具创建 macOS 安装包：
+
+```bash
+brew install create-dmg
+create-dmg \
+  --volname "Hotkey App" \
+  --window-pos 200 120 \
+  --window-size 800 400 \
+  --icon-size 100 \
+  --icon "Hotkey App.app" 200 190 \
+  --hide-extension "Hotkey App.app" \
+  --app-drop-link 600 185 \
+  "Hotkey App.dmg" \
+  "build/macos/Build/Products/Release/"
+```
+
+## 发布到应用商店
+
+如果要发布到 Mac App Store，需要：
+
+1. 在 Apple Developer 后台注册应用
+2. 配置签名和证书
+3. 使用 Xcode 归档并上传
+
+## 下一步
+
+恭喜！你已经完成了快捷键应用的开发。

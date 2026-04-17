@@ -1,6 +1,12 @@
 ---
+order: 0
 title: 环境配置
 ---
+
+```json
+# {frontmatter.title}
+```dart
+
 
 在开始开发我们的快捷键应用之前，需要先配置好开发环境。本章将指导你完成所有必要的环境配置。
 
@@ -10,20 +16,20 @@ title: 环境配置
    https://flutter.dev/docs/get-started/install/macos
 
 2. 解压下载的文件到你想要的位置，例如：
-   ```bash
+```bash
    cd ~/development
    unzip ~/Downloads/flutter_macos_arm64_3.x.x-stable.zip
-   ```
+```
 
 3. 将 Flutter 添加到环境变量，编辑 `~/.zshrc` 或 `~/.bash_profile`：
-   ```bash
+```bash
    export PATH="$PATH:~/development/flutter/bin"
-   ```
+```dart
 
 4. 运行以下命令验证安装：
-   ```bash
+```bash
    flutter doctor
-   ```
+```
 
 ## 安装 Xcode
 
@@ -32,14 +38,14 @@ title: 环境配置
 1. 从 Mac App Store 安装 Xcode
 
 2. 安装完成后，运行以下命令接受许可协议：
-   ```bash
+```bash
    sudo xcodebuild -license accept
-   ```
+```dart
 
 3. 安装 Xcode 命令行工具：
-   ```bash
+```bash
    sudo xcode-select --install
-   ```
+```
 
 ## 配置 VS Code
 
@@ -53,14 +59,14 @@ title: 环境配置
 ## 启用 macOS 桌面支持
 
 1. 启用 macOS 桌面支持：
-   ```bash
+```bash
    flutter config --enable-macos-desktop
-   ```
+```dart
 
 2. 验证 macOS 是否在支持的平台列表中：
-   ```bash
+```bash
    flutter devices
-   ```
+```
 
 ## 验证环境
 
@@ -68,7 +74,6 @@ title: 环境配置
 
 ```bash
 flutter doctor
-```
 
 确保所有检查项都显示为 ✓。如果有任何问题，按照提示解决即可。
 

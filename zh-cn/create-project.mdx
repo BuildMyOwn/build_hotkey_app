@@ -1,0 +1,88 @@
+---
+order: 1
+title: 创建项目
+---
+
+# {frontmatter.title}
+
+在本章中，我们将为快捷键应用创建一个新的 Flutter 项目。
+
+## 创建 Flutter 项目
+
+运行以下命令创建新的 Flutter 项目：
+
+```bash
+flutter create hotkey_app
+cd hotkey_app
+```
+
+## 添加依赖
+
+在 `pubspec.yaml` 中添加以下依赖：
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  window_manager: ^0.3.0
+  hotkey_manager: ^0.1.7
+  provider: ^6.0.0
+```
+
+## 配置 macOS 权限
+
+1. 打开 `macos/Runner/DebugProfile.entitlements` 文件并添加以下权限：
+
+```xml
+<dict>
+  <key>com.apple.security.temporary-exception.apple-events</key>
+  <string>com.apple.systemevents</string>
+</dict>
+```
+
+2. 在 `macos/Runner/Release.entitlements` 中添加相同的配置。
+
+## 清理默认代码
+
+1. 打开 `lib/main.dart` 并删除默认的计数器示例代码。
+
+2. 创建基本的应用结构：
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hotkey App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hotkey App'),
+      ),
+      body: Center(
+        child: Text('Hello World'),
+      ),
+    );
+  }
+}
+```
+
+## 下一步
+
+现在项目已经设置好了，我们将在下一章学习窗口管理。

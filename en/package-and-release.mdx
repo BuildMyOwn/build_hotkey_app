@@ -1,0 +1,56 @@
+---
+order: 5
+title: Package and Release
+---
+
+# {frontmatter.title}
+
+In this chapter, we will learn how to package and release the Flutter desktop application.
+
+## Build Application
+
+Run the following command to build the application:
+
+```bash
+flutter build macos --release
+```
+
+The built application is located at:
+
+```
+build/macos/Build/Products/Release/
+```
+
+## Configure App Information
+
+Configure app information such as app name and version number in `macos/Runner/Info.plist`.
+
+## Create Installer
+
+You can use the `create-dmg` tool to create a macOS installer:
+
+```bash
+brew install create-dmg
+create-dmg \
+  --volname "Hotkey App" \
+  --window-pos 200 120 \
+  --window-size 800 400 \
+  --icon-size 100 \
+  --icon "Hotkey App.app" 200 190 \
+  --hide-extension "Hotkey App.app" \
+  --app-drop-link 600 185 \
+  "Hotkey App.dmg" \
+  "build/macos/Build/Products/Release/"
+```
+
+## Publish to App Store
+
+To publish to the Mac App Store:
+
+1. Register the app in Apple Developer backend
+2. Configure signing and certificates
+3. Use Xcode to archive and upload
+
+## Next Steps
+
+Congratulations! You have completed the development of the hotkey application.

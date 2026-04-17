@@ -1,0 +1,92 @@
+---
+order: 4
+title: 状态管理
+---
+
+```json
+# {frontmatter.title}
+```dart
+
+在本章中，我们将学习如何使用 Provider 进行状态管理。
+
+## Provider 简介
+
+Provider 是 Flutter 中常用的状态管理方案。
+
+## 实现状态管理
+
+```dart
+class HotKeySettings extends ChangeNotifier {
+  HotKey? _globalHotKey;
+
+  HotKey? get globalHotKey => _globalHotKey;
+
+  void setGlobalHotKey(HotKey hotKey) {
+    _globalHotKey = hotKey;
+    notifyListeners();
+  }
+}
+
+class HotKeyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => HotKeySettings(),
+      child: MaterialApp(
+        home: HotKeySettingsPage(),
+      ),
+    );
+  }
+}
+
+class HotKeySettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('快捷键设置'),
+      ),
+      body: Consumer<HotKeySettings>(
+        builder: (context, settings, child) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '当前快捷键：${settings.globalHotKey?.toString() ?? "未设置"}',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  // 显示快捷键录制界面
+                  final newHotKey = await showDialog<HotKey>(
+                    context: context,
+                    builder: (context) => HotKeyRecordDialog(),
+                  );
+
+                  if (newHotKey != null) {
+                    context.read<HotKeySettings>().setGlobalHotKey(newHotKey);
+                  }
+                },
+                child: Text('设置新快捷键'),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+## 常见问题
+
+1. **Provider 的使用**
+   - 使用 `Consumer` 访问状态
+   - 使用 `context.read()` 读取状态
+
+2. **状态更新**
+   - 调用 `notifyListeners()` 通知监听器
+
+## 下一步
+
+在下一章中，我们将学习如何打包和发布应用。

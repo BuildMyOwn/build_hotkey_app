@@ -1,0 +1,96 @@
+---
+order: 2
+title: 窗口管理
+---
+
+# {frontmatter.title}
+
+在本章中，我们将学习如何实现窗口管理功能。
+
+## 窗口管理基础
+
+Flutter 桌面应用可以通过 window_manager 包控制窗口属性。
+
+### 安装
+
+在 `pubspec.yaml` 中添加：
+
+```yaml
+dependencies:
+  window_manager: ^0.3.0
+```
+
+### 基本使用
+
+```dart
+import 'package:window_manager/window_manager.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(800, 600),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.normal,
+  );
+  
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
+  
+  runApp(MyApp());
+}
+```
+
+## 窗口控制
+
+### 最小化、最大化、关闭
+
+```dart
+// 最小化
+await windowManager.minimize();
+
+// 最大化
+await windowManager.maximize();
+
+// 关闭
+await windowManager.close();
+```
+
+### 窗口大小
+
+```dart
+// 设置大小
+await windowManager.setSize(Size(1024, 768));
+
+// 获取大小
+Size size = await windowManager.getSize();
+
+// 设置最小大小
+await windowManager.setMinimumSize(Size(800, 600));
+```
+
+## 拖动窗口
+
+使窗口可拖动：
+
+```dart
+GestureDetector(
+  onPanStart: (details) {
+    windowManager.startDragging();
+  },
+  child: Container(
+    height: 32,
+    color: Colors.transparent,
+    child: Text('拖动以移动窗口'),
+  ),
+)
+```
+
+## 下一步
+
+在下一章中学习快捷键设置。

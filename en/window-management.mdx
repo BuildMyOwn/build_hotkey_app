@@ -1,0 +1,96 @@
+---
+order: 2
+title: Window Management
+---
+
+# {frontmatter.title}
+
+In this chapter, we will learn how to implement window management functionality.
+
+## Window Management Basics
+
+Flutter desktop applications can control window properties through the window_manager package.
+
+### Installation
+
+Add to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  window_manager: ^0.3.0
+```
+
+### Basic Usage
+
+```dart
+import 'package:window_manager/window_manager.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(800, 600),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.normal,
+  );
+  
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
+  
+  runApp(MyApp());
+}
+```
+
+## Window Control
+
+### Minimize, Maximize, Close
+
+```dart
+// Minimize
+await windowManager.minimize();
+
+// Maximize
+await windowManager.maximize();
+
+// Close
+await windowManager.close();
+```
+
+### Window Size
+
+```dart
+// Set size
+await windowManager.setSize(Size(1024, 768));
+
+// Get size
+Size size = await windowManager.getSize();
+
+// Set minimum size
+await windowManager.setMinimumSize(Size(800, 600));
+```
+
+## Dragging Window
+
+To make the window draggable:
+
+```dart
+GestureDetector(
+  onPanStart: (details) {
+    windowManager.startDragging();
+  },
+  child: Container(
+    height: 32,
+    color: Colors.transparent,
+    child: Text('Drag to move window'),
+  ),
+)
+```
+
+## Next Steps
+
+Learn about hotkey settings in the next chapter.
